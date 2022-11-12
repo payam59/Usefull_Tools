@@ -6,6 +6,7 @@ namespace ConvertLatLongDec2UTM
 {
     public partial class Form1 : Form
     {
+        string coordinates=null;
         public Form1()
         {
             InitializeComponent();
@@ -79,6 +80,10 @@ namespace ConvertLatLongDec2UTM
 
                         string coordinateN = coordinate.Substring(0, coordinate.IndexOf('N'));
                         string coordinateE = coordinate.Substring(coordinate.IndexOf('N')+1).Replace("E","");
+
+                        coordinates = coordinates + airportCode + "," + coordinateN + "," + coordinateE + ";";
+
+
                         string convE =deglon(coordinateE);
                         string convN = deglat(coordinateN);
 
@@ -89,9 +94,30 @@ namespace ConvertLatLongDec2UTM
 
 
                 }
-
+                MessageBox.Show("Airport coordinates loaded.");
             }
             
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //Simbolo 334020999N 0565330008E Tabas 2000#5
+
+            string exportsimbolo=null;
+            string[] simarr = coordinates.Split(';');
+            int i = 1;
+            foreach (string airport in simarr)
+            {
+                if (airport != "")
+                {
+                    string[] temp = airport.Split(',');
+                    string temp1 = String.Format("Simbolo {0}000N {1}000E {2} 2000#{3}", temp[1], temp[2], temp[0], i.ToString()) + "\r\n";
+                    i++;
+                    exportsimbolo = exportsimbolo + temp1;
+                }
+
+           }
+            richTextBox1.Text=exportsimbolo;
         }
     }
 }
