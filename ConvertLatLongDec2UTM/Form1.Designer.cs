@@ -33,6 +33,7 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBox1
@@ -79,11 +80,22 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Indra VR3000 Compatible";
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(690, 57);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(138, 23);
+            this.button3.TabIndex = 5;
+            this.button3.Text = "Export VR3000 Airways";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(840, 450);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.richTextBox1);
@@ -103,5 +115,6 @@
         private RichTextBox richTextBox1;
         private Button button2;
         private Label label1;
+        private Button button3;
     }
 }
