@@ -11,7 +11,16 @@ namespace ConvertLatLongDec2UTM
             InitializeComponent();
         }
 
+        /*
+        #Simbolo 3932552000N 0024357950E 20
+        Linea 334020999N 0565330008E 325820006N 0591200007E
+        Linea 345423002N 0522023001E 333130998N 0535239999E
+        Linea 325330000N 0545850000E 324008000N 0552339000E
+        Simbolo 334020999N 0565330008E Tabas 2000#5
+        Simbolo 325820006N 0591200007E birjand 2000#6
 
+
+        */
         private string deglon(string deglon)
         {
            decimal signlon;
@@ -24,6 +33,19 @@ namespace ConvertLatLongDec2UTM
            string converted = (Math.Floor(lonAbs / 1000000) * signlon).ToString() + "° " + Math.Floor(((lonAbs / 1000000) - Math.Floor(lonAbs / 1000000)) * 60).ToString() + "\' " + (Math.Floor(((((lonAbs / 1000000) - Math.Floor(lonAbs / 1000000)) * 60) - Math.Floor(((lonAbs / 1000000) - Math.Floor(lonAbs / 1000000)) * 60)) * 100000) * 60 / 100000).ToString() + "\"";
             return converted;
         
+        }
+        private string deglat(string deglat)
+        {
+            decimal signlat;
+            if (deglat.Substring(0, 1) == "-") { signlat = -1; }
+            else
+            { signlat = 1; }
+
+            decimal latAbs = Math.Abs(Math.Round(Convert.ToDecimal(deglat) * 1000000));
+
+            string converted = ((Math.Floor(latAbs / 1000000) * signlat) + "° " + Math.Floor(((latAbs / 1000000) - Math.Floor(latAbs / 1000000)) * 60) + "\' " + (Math.Floor(((((latAbs / 1000000) - Math.Floor(latAbs / 1000000))* 60) - Math.Floor(((latAbs / 1000000) - Math.Floor(latAbs / 1000000)) * 60)) * 100000) * 60 / 100000) + '\"');
+            return converted;
+
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -58,6 +80,9 @@ namespace ConvertLatLongDec2UTM
                         string coordinateN = coordinate.Substring(0, coordinate.IndexOf('N'));
                         string coordinateE = coordinate.Substring(coordinate.IndexOf('N')+1).Replace("E","");
                         string convE =deglon(coordinateE);
+                        string convN = deglat(coordinateN);
+
+                        richTextBox1.Text = richTextBox1.Text + "\r\n" + convN + " N " + convE + " E";
 
                         // }
                     }
